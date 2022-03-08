@@ -1,8 +1,16 @@
 package Employee;
 
+import java.util.Arrays;
+
 public class Employee
 {
-    private static final int PRESENT = 1;
+    String employeeName;
+    public Employee(String name){
+        this.employeeName=name;
+    }
+
+
+    private static final int FULLTIME = 1;
 //    int PRESENT=1;
     private static final int PARTTIME = 2;
     int WAGE_PRE_HOUR=20;
@@ -29,32 +37,39 @@ public class Employee
         int dailyWage = 0;
         int totalWorkingDays =0;
         int totalWorkingHours=0;
-
+        int wageEveryDay[]=new int[WORKING_DAY_PER_MONTH];
         while (totalWorkingDays < WORKING_DAY_PER_MONTH && totalWorkingHours+4 < WORKING_HOURS_PER_MONTH){
             int isEmployeePresent=checkEmployeeIsPresent();
 //        using switch case to calculate wages
             switch (isEmployeePresent) {
-                case PRESENT:
+                case FULLTIME:
                     dailyWage+= FULL_DAY_HOUR * WAGE_PRE_HOUR;
                     totalWorkingHours+=FULL_DAY_HOUR;
+//                    store wage in array
+                    wageEveryDay[totalWorkingDays]=FULL_DAY_HOUR * WAGE_PRE_HOUR;
 //                    System.out.println("Full day total wage is $"+dailyWage);
                     break;
                 case PARTTIME:
                     dailyWage+= PART_DAY_HOUR * WAGE_PRE_HOUR;
                     totalWorkingHours+=PART_DAY_HOUR;
+                    wageEveryDay[totalWorkingDays]=PART_DAY_HOUR * WAGE_PRE_HOUR;
 //                    System.out.println("Part time day total wage is $"+dailyWage);
                     break;
                 default:
                     dailyWage+=0;
                     totalWorkingHours+=0;
+                    wageEveryDay[totalWorkingDays]=0;
 //                    System.out.println("Absent day total wage is $"+dailyWage);
                     break;
             }
             totalWorkingDays++;
         }
+        System.out.println("Name:"+employeeName);
         System.out.println("Total Working Days:"+totalWorkingDays+"/"+WORKING_DAY_PER_MONTH+
                 "\nTotal Working Hours "+totalWorkingHours+"/"+WORKING_HOURS_PER_MONTH+
                 "\nTotal monthly wage $"+dailyWage);
+//        System.out.println("list of all day wages \n"+wageEveryDay);
+        System.out.println("list of all day wages \n"+Arrays.toString(wageEveryDay));
     }
 
 }
