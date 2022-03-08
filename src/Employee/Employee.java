@@ -9,6 +9,7 @@ public class Employee
     int FULL_DAY_HOUR=8;
     int PART_DAY_HOUR=4;
     int WORKING_DAY_PER_MONTH=20;
+    int WORKING_HOURS_PER_MONTH=100;
 
     public int checkEmployeeIsPresent(){
         int isPresent=(int)Math.round( Math.random() * 2);
@@ -26,27 +27,34 @@ public class Employee
 
     public void calculateDailyWage(){
         int dailyWage = 0;
-        int total_working_days =1;
-        while (total_working_days < WORKING_DAY_PER_MONTH){
+        int totalWorkingDays =0;
+        int totalWorkingHours=0;
+
+        while (totalWorkingDays < WORKING_DAY_PER_MONTH && totalWorkingHours+4 < WORKING_HOURS_PER_MONTH){
             int isEmployeePresent=checkEmployeeIsPresent();
 //        using switch case to calculate wages
             switch (isEmployeePresent) {
                 case PRESENT:
                     dailyWage+= FULL_DAY_HOUR * WAGE_PRE_HOUR;
+                    totalWorkingHours+=FULL_DAY_HOUR;
 //                    System.out.println("Full day total wage is $"+dailyWage);
                     break;
                 case PARTTIME:
                     dailyWage+= PART_DAY_HOUR * WAGE_PRE_HOUR;
+                    totalWorkingHours+=PART_DAY_HOUR;
 //                    System.out.println("Part time day total wage is $"+dailyWage);
                     break;
                 default:
                     dailyWage+=0;
+                    totalWorkingHours+=0;
 //                    System.out.println("Absent day total wage is $"+dailyWage);
                     break;
             }
-            total_working_days++;
+            totalWorkingDays++;
         }
-        System.out.println("For "+total_working_days+" days Total monthly wage is: $"+dailyWage);
+        System.out.println("Total Working Days:"+totalWorkingDays+"/"+WORKING_DAY_PER_MONTH+
+                "\nTotal Working Hours "+totalWorkingHours+"/"+WORKING_HOURS_PER_MONTH+
+                "\nTotal monthly wage $"+dailyWage);
     }
 
 }
