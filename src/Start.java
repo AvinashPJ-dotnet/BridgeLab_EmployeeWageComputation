@@ -1,8 +1,8 @@
-import Employee.EmployeeAttendance;
+import Employee.Employee;
 
 public class Start {
     public static void main(String[] args) {
-        EmployeeAttendance employeeAttendance = new EmployeeAttendance();
-        employeeAttendance.checkEmployeeIsPresent();
+        Employee employeeAttendance = new Employee();
+        employeeAttendance.calculateDailyWage();
     }
 }
