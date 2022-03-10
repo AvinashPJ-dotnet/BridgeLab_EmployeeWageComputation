@@ -8,33 +8,24 @@ public class Employee
     public Employee(String name){
         this.employeeName=name;
     }
-
-
     private static final int FULLTIME = 1;
-//    int PRESENT=1;
     private static final int PARTTIME = 2;
-    int WAGE_PRE_HOUR=20;
-    int FULL_DAY_HOUR=8;
-    int PART_DAY_HOUR=4;
+    int WAGE_PER_HOUR =20;
+    int FULL_TIME_HOURS =8;
+    int PART_TIME_HOURS =4;
     int WORKING_DAY_PER_MONTH=20;
     int WORKING_HOURS_PER_MONTH=100;
 
     public int checkEmployeeIsPresent(){
         int isPresent=(int)Math.round( Math.random() * 2);
-        /*if (isPresent == PRESENT){
-            System.out.println("Employee is Present");
-        }
-        else if(isPresent== PARTTIME){
-            System.out.println("Employee is Part time Present");
-        }
-        else{
-            System.out.println("Employee is Absent");
-        }*/
         return isPresent;
     }
 
     public void calculateDailyWage(){
-        int dailyWage = 0;
+        int dailyWage = 0;//store only one day wage
+        int dailyWorkingHours=0;//store the daily working hours that is either full-time or part-time
+
+        int totalWage=0;//store total wage
         int totalWorkingDays =0;
         int totalWorkingHours=0;
         int wageEveryDay[]=new int[WORKING_DAY_PER_MONTH];
@@ -43,33 +34,33 @@ public class Employee
 //        using switch case to calculate wages
             switch (isEmployeePresent) {
                 case FULLTIME:
-                    dailyWage+= FULL_DAY_HOUR * WAGE_PRE_HOUR;
-                    totalWorkingHours+=FULL_DAY_HOUR;
-//                    store wage in array
-                    wageEveryDay[totalWorkingDays]=FULL_DAY_HOUR * WAGE_PRE_HOUR;
-//                    System.out.println("Full day total wage is $"+dailyWage);
+                    dailyWage= calculateWage(FULL_TIME_HOURS,WAGE_PER_HOUR);
+                    dailyWorkingHours= FULL_TIME_HOURS;
                     break;
                 case PARTTIME:
-                    dailyWage+= PART_DAY_HOUR * WAGE_PRE_HOUR;
-                    totalWorkingHours+=PART_DAY_HOUR;
-                    wageEveryDay[totalWorkingDays]=PART_DAY_HOUR * WAGE_PRE_HOUR;
-//                    System.out.println("Part time day total wage is $"+dailyWage);
+                    dailyWage= calculateWage(PART_TIME_HOURS,WAGE_PER_HOUR);
+                    dailyWorkingHours= PART_TIME_HOURS;
                     break;
                 default:
-                    dailyWage+=0;
-                    totalWorkingHours+=0;
-                    wageEveryDay[totalWorkingDays]=0;
-//                    System.out.println("Absent day total wage is $"+dailyWage);
+                    dailyWage=0;
+                    dailyWorkingHours=0;
                     break;
             }
+            totalWorkingHours+=dailyWorkingHours;
+            totalWage+=dailyWage;
             totalWorkingDays++;
+            wageEveryDay[totalWorkingDays]= dailyWage;//store wage in to array on daily basis
         }
         System.out.println("Name:"+employeeName);
         System.out.println("Total Working Days:"+totalWorkingDays+"/"+WORKING_DAY_PER_MONTH+
                 "\nTotal Working Hours "+totalWorkingHours+"/"+WORKING_HOURS_PER_MONTH+
                 "\nTotal monthly wage $"+dailyWage);
-//        System.out.println("list of all day wages \n"+wageEveryDay);
         System.out.println("list of all day wages \n"+Arrays.toString(wageEveryDay));
     }
 
+    //Calculate employee wage
+    public int calculateWage(int hours,int wagePerHour)
+    {
+        return hours * wagePerHour;
+    }
 }
