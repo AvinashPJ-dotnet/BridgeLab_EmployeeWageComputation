@@ -22,14 +22,13 @@ public class Employee
     }
 
     public void calculateDailyWage(){
-        int dailyWage = 0;//store only one day wage
-        int dailyWorkingHours=0;//store the daily working hours that is either full-time or part-time
-
         int totalWage=0;//store total wage
         int totalWorkingDays =0;
         int totalWorkingHours=0;
-        int wageEveryDay[]=new int[WORKING_DAY_PER_MONTH];
+        int[] wageEveryDay =new int[WORKING_DAY_PER_MONTH];
         while (totalWorkingDays < WORKING_DAY_PER_MONTH && totalWorkingHours+4 < WORKING_HOURS_PER_MONTH){
+            int dailyWage = 0;//store only one day wage
+            int dailyWorkingHours=0;//store the daily working hours that is either full-time or part-time
             int isEmployeePresent=checkEmployeeIsPresent();
 //        using switch case to calculate wages
             switch (isEmployeePresent) {
@@ -54,7 +53,7 @@ public class Employee
         System.out.println("Name:"+employeeName);
         System.out.println("Total Working Days:"+totalWorkingDays+"/"+WORKING_DAY_PER_MONTH+
                 "\nTotal Working Hours "+totalWorkingHours+"/"+WORKING_HOURS_PER_MONTH+
-                "\nTotal monthly wage $"+dailyWage);
+                "\nTotal monthly wage $"+totalWage);
         System.out.println("list of all day wages \n"+Arrays.toString(wageEveryDay));
     }
 
