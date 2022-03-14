@@ -47,8 +47,8 @@ public class Employee
             }
             totalWorkingHours+=dailyWorkingHours;
             totalWage+=dailyWage;
-            totalWorkingDays++;
             wageEveryDay[totalWorkingDays]= dailyWage;//store wage in to array on daily basis
+            totalWorkingDays++;
         }
         System.out.println("Name:"+employeeName);
         System.out.println("Total Working Days:"+totalWorkingDays+"/"+WORKING_DAY_PER_MONTH+
