@@ -3,19 +3,24 @@ package Employee;
 import java.util.Arrays;
 
 public class Employee {
-    String employeeName;
 
-    public Employee(String name) {
-        this.employeeName = name;
-    }
-
-    private static final int FULLTIME = 1;
-    private static final int PARTTIME = 2;
-    public int WAGE_PER_HOUR = 20;
+    private static final int FULL_TIME = 1;
+    private static final int PART_TIME = 2;
     public int FULL_TIME_HOURS = 8;
     public int PART_TIME_HOURS = 4;
-    public int WORKING_DAY_PER_MONTH = 20;
-    public int WORKING_HOURS_PER_MONTH = 100;
+
+    //constant variables are initialized in constructor
+    private final String companyName;
+    private final int WAGE_PER_HOUR;
+    private final int WORKING_DAY_PER_MONTH;
+    private final int WORKING_HOURS_PER_MONTH;
+
+    public Employee(String companyName, int wagePerHour, int workingDaysPerMonth, int workingHourPreMonth) {
+        this.companyName = companyName;
+        this.WAGE_PER_HOUR = wagePerHour;
+        this.WORKING_DAY_PER_MONTH = workingDaysPerMonth;
+        this.WORKING_HOURS_PER_MONTH = workingHourPreMonth;
+    }
 
     public int checkEmployeeIsPresent() {
         return (int) Math.round(Math.random() * 2);
@@ -32,11 +37,11 @@ public class Employee {
             int isEmployeePresent = checkEmployeeIsPresent();
 //        using switch case to calculate wages
             switch (isEmployeePresent) {
-                case FULLTIME:
+                case FULL_TIME:
                     dailyWage = calculateWage(FULL_TIME_HOURS, WAGE_PER_HOUR);
                     dailyWorkingHours = FULL_TIME_HOURS;
                     break;
-                case PARTTIME:
+                case PART_TIME:
                     dailyWage = calculateWage(PART_TIME_HOURS, WAGE_PER_HOUR);
                     dailyWorkingHours = PART_TIME_HOURS;
                     break;
@@ -48,11 +53,11 @@ public class Employee {
             wageEveryDay[totalWorkingDays] = dailyWage;//store wage in to array on daily basis
             totalWorkingDays++;
         }
-        System.out.println("Name:" + employeeName);
+        System.out.println("Name: " + companyName);
         System.out.println("Total Working Days:" + totalWorkingDays + "/" + WORKING_DAY_PER_MONTH +
-                "\nTotal Working Hours " + totalWorkingHours + "/" + WORKING_HOURS_PER_MONTH +
-                "\nTotal monthly wage $" + totalWage);
-        System.out.println("list of all day wages \n" + Arrays.toString(wageEveryDay));
+                "\nTotal Working Hours: " + totalWorkingHours + "/" + WORKING_HOURS_PER_MONTH +
+                "\nTotal monthly wage: $" + totalWage);
+        System.out.println("list of all day wages: \n" + Arrays.toString(wageEveryDay));
         System.out.println();
     }
 
