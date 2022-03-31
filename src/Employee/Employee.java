@@ -35,8 +35,9 @@ public class Employee {
             int dailyWage = 0;//store only one day wage
             int dailyWorkingHours = 0;//store the daily working hours that is either full-time or part-time
             int isEmployeePresent = checkEmployeeIsPresent();
-//        using switch case to calculate wages
-            switch (isEmployeePresent) {
+
+            switch (isEmployeePresent) //using switch case to calculate wages
+            {
                 case FULL_TIME:
                     dailyWage = calculateWage(FULL_TIME_HOURS, WAGE_PER_HOUR);
                     dailyWorkingHours = FULL_TIME_HOURS;
