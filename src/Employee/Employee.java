@@ -10,13 +10,13 @@ public class Employee {
     public int PART_TIME_HOURS = 4;
 
     //constant variables are initialized in constructor
-    private final String companyName;
+    private final String COMPANY_NAME;
     private final int WAGE_PER_HOUR;
     private final int WORKING_DAY_PER_MONTH;
     private final int WORKING_HOURS_PER_MONTH;
 
     public Employee(String companyName, int wagePerHour, int workingDaysPerMonth, int workingHourPreMonth) {
-        this.companyName = companyName;
+        this.COMPANY_NAME = companyName;
         this.WAGE_PER_HOUR = wagePerHour;
         this.WORKING_DAY_PER_MONTH = workingDaysPerMonth;
         this.WORKING_HOURS_PER_MONTH = workingHourPreMonth;
@@ -26,7 +26,7 @@ public class Employee {
         return (int) Math.round(Math.random() * 2);
     }
 
-    public void calculateDailyWage() {
+    public int calculateDailyWage() {
         int totalWage = 0;//store total wage
         int totalWorkingDays = 0;
         int totalWorkingHours = 0;
@@ -54,12 +54,13 @@ public class Employee {
             wageEveryDay[totalWorkingDays] = dailyWage;//store wage in to array on daily basis
             totalWorkingDays++;
         }
-        System.out.println("Name: " + companyName);
+        System.out.println("Name: " + COMPANY_NAME);
         System.out.println("Total Working Days:" + totalWorkingDays + "/" + WORKING_DAY_PER_MONTH +
                 "\nTotal Working Hours: " + totalWorkingHours + "/" + WORKING_HOURS_PER_MONTH +
                 "\nTotal monthly wage: $" + totalWage);
         System.out.println("list of all day wages: \n" + Arrays.toString(wageEveryDay));
         System.out.println();
+        return totalWage;
     }
 
     //Calculate employee wage
