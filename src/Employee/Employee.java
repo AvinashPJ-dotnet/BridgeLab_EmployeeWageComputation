@@ -6,32 +6,34 @@ public class Employee {
 
     private static final int FULL_TIME = 1;
     private static final int PART_TIME = 2;
-    public int FULL_TIME_HOURS = 8;
-    public int PART_TIME_HOURS = 4;
 
-    //constant variables are initialized in constructor
-    private final String COMPANY_NAME;
-    private final int WAGE_PER_HOUR;
-    private final int WORKING_DAY_PER_MONTH;
-    private final int WORKING_HOURS_PER_MONTH;
+    int numOfCompany=0;
+    private final CompanyEmployeeWage[] companyEmployeeWagesArray;
 
-    public Employee(String companyName, int wagePerHour, int workingDaysPerMonth, int workingHourPreMonth) {
-        this.COMPANY_NAME = companyName;
-        this.WAGE_PER_HOUR = wagePerHour;
-        this.WORKING_DAY_PER_MONTH = workingDaysPerMonth;
-        this.WORKING_HOURS_PER_MONTH = workingHourPreMonth;
+    public Employee() {
+        companyEmployeeWagesArray =new CompanyEmployeeWage[5];
+    }
+    public void addCompanyEmployeeWage(String companyName, int wagePerHour, int workingDaysPerMonth, int workingHourPreMonth){
+        companyEmployeeWagesArray[numOfCompany]=new CompanyEmployeeWage(companyName,wagePerHour,workingDaysPerMonth,workingHourPreMonth);
+        numOfCompany++;
+    }
+    public void computeEmployeeWage(){
+        for (int i = 0; i < numOfCompany; i++) {
+            calculateDailyWage(companyEmployeeWagesArray[i]);
+        }
     }
 
     public int checkEmployeeIsPresent() {
         return (int) Math.round(Math.random() * 2);
     }
 
-    public int calculateDailyWage() {
+    public int calculateDailyWage(CompanyEmployeeWage companyEmployeeWagesArray) {
         int totalWage = 0;//store total wage
         int totalWorkingDays = 0;
         int totalWorkingHours = 0;
-        int[] wageEveryDay = new int[WORKING_DAY_PER_MONTH];
-        while (totalWorkingDays < WORKING_DAY_PER_MONTH && totalWorkingHours + 4 < WORKING_HOURS_PER_MONTH) {
+        int[] wageEveryDay = new int[companyEmployeeWagesArray.getWorkingDaysPerMonth()];
+        while (totalWorkingDays < companyEmployeeWagesArray.getWorkingDaysPerMonth() && totalWorkingHours + 4 < companyEmployeeWagesArray.getWorkingHourPerMonth()) {
+
             int dailyWage = 0;//store only one day wage
             int dailyWorkingHours = 0;//store the daily working hours that is either full-time or part-time
             int isEmployeePresent = checkEmployeeIsPresent();
@@ -39,12 +41,12 @@ public class Employee {
             switch (isEmployeePresent) //using switch case to calculate wages
             {
                 case FULL_TIME:
-                    dailyWage = calculateWage(FULL_TIME_HOURS, WAGE_PER_HOUR);
-                    dailyWorkingHours = FULL_TIME_HOURS;
+                    dailyWage = calculateWage(companyEmployeeWagesArray.getFullTimeHours(), companyEmployeeWagesArray.getWagePerHour());
+                    dailyWorkingHours = companyEmployeeWagesArray.getFullTimeHours();
                     break;
                 case PART_TIME:
-                    dailyWage = calculateWage(PART_TIME_HOURS, WAGE_PER_HOUR);
-                    dailyWorkingHours = PART_TIME_HOURS;
+                    dailyWage = calculateWage(companyEmployeeWagesArray.getPartTimeHours(), companyEmployeeWagesArray.getWagePerHour());
+                    dailyWorkingHours = companyEmployeeWagesArray.getPartTimeHours();
                     break;
                 default:
                     break;
@@ -54,9 +56,9 @@ public class Employee {
             wageEveryDay[totalWorkingDays] = dailyWage;//store wage in to array on daily basis
             totalWorkingDays++;
         }
-        System.out.println("Name: " + COMPANY_NAME);
-        System.out.println("Total Working Days:" + totalWorkingDays + "/" + WORKING_DAY_PER_MONTH +
-                "\nTotal Working Hours: " + totalWorkingHours + "/" + WORKING_HOURS_PER_MONTH +
+        System.out.println("Name: " + companyEmployeeWagesArray.getCompanyName());
+        System.out.println("Total Working Days:" + totalWorkingDays + "/" + companyEmployeeWagesArray.getWorkingDaysPerMonth() +
+                "\nTotal Working Hours: " + totalWorkingHours + "/" + companyEmployeeWagesArray.getWorkingHourPerMonth() +
                 "\nTotal monthly wage: $" + totalWage);
         System.out.println("list of all day wages: \n" + Arrays.toString(wageEveryDay));
         System.out.println();
