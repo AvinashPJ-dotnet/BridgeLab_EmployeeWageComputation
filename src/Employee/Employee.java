@@ -1,5 +1,6 @@
 package Employee;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Employee implements EmployeeInterface {
@@ -7,20 +8,22 @@ public class Employee implements EmployeeInterface {
     private static final int FULL_TIME = 1;
     private static final int PART_TIME = 2;
 
-    int numOfCompany=0;
-    private final CompanyEmployeeWage[] companyEmployeeWagesArray;
+    int numOfCompany = 0;
+    private final ArrayList<CompanyEmployeeWage> companyEmployeeWagesArray;
 
     public Employee() {
-        companyEmployeeWagesArray =new CompanyEmployeeWage[5];
+        companyEmployeeWagesArray = new ArrayList<>();
     }
+
     @Override
-    public void addCompanyEmployeeWage(String companyName, int wagePerHour, int workingDaysPerMonth, int workingHourPreMonth){
-        companyEmployeeWagesArray[numOfCompany]=new CompanyEmployeeWage(companyName,wagePerHour,workingDaysPerMonth,workingHourPreMonth);
+    public void addCompanyEmployeeWage(String companyName, int wagePerHour, int workingDaysPerMonth, int workingHourPreMonth) {
+        companyEmployeeWagesArray.add(new CompanyEmployeeWage(companyName, wagePerHour, workingDaysPerMonth, workingHourPreMonth));
         numOfCompany++;
     }
-    public void computeEmployeeWage(){
-        for (int i = 0; i < numOfCompany; i++) {
-            calculateDailyWage(companyEmployeeWagesArray[i]);
+
+    public void computeEmployeeWage() {
+        for (CompanyEmployeeWage obj : companyEmployeeWagesArray) {
+            calculateDailyWage(obj);
         }
     }
 

@@ -35,5 +35,4 @@ public class CompanyEmployeeWage {
     public int getWorkingHourPerMonth() {
         return WORKING_HOURS_PER_MONTH;
     }
-
 }
