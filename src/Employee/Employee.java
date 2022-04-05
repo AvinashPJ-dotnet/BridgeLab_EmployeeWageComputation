@@ -1,6 +1,7 @@
 package Employee;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Employee implements EmployeeInterface {
 
@@ -71,5 +72,17 @@ public class Employee implements EmployeeInterface {
     //Calculate employee wage
     public int calculateWage(int hours, int wagePerHour) {
         return hours * wagePerHour;
+    }
+
+    public void getWageByCompanyName() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter Company Name: ");
+        String companyName = input.next();
+        for (CompanyEmployeeWage obj : companyEmployeeWagesArray) {
+            if (obj.getCompanyName().equalsIgnoreCase(companyName)) {
+                System.out.println("Company: " + obj.getCompanyName());
+                System.out.println("Total Wage: " + obj.totalWage);
+            }
+        }
     }
 }

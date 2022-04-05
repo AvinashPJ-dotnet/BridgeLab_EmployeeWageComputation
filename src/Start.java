@@ -8,7 +8,7 @@ public class Start {
         employee.addCompanyEmployeeWage("bigBazar",15,18,118);
         employee.addCompanyEmployeeWage("mart",21,20,121);
         employee.computeEmployeeWage();
-
+        employee.getWageByCompanyName();
     }
 
 }
