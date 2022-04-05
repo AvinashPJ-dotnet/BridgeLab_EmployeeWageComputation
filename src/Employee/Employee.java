@@ -2,7 +2,7 @@ package Employee;
 
 import java.util.Arrays;
 
-public class Employee {
+public class Employee implements EmployeeInterface {
 
     private static final int FULL_TIME = 1;
     private static final int PART_TIME = 2;
@@ -13,6 +13,7 @@ public class Employee {
     public Employee() {
         companyEmployeeWagesArray =new CompanyEmployeeWage[5];
     }
+    @Override
     public void addCompanyEmployeeWage(String companyName, int wagePerHour, int workingDaysPerMonth, int workingHourPreMonth){
         companyEmployeeWagesArray[numOfCompany]=new CompanyEmployeeWage(companyName,wagePerHour,workingDaysPerMonth,workingHourPreMonth);
         numOfCompany++;
@@ -27,6 +28,7 @@ public class Employee {
         return (int) Math.round(Math.random() * 2);
     }
 
+    @Override
     public int calculateDailyWage(CompanyEmployeeWage companyEmployeeWagesArray) {
         int totalWage = 0;//store total wage
         int totalWorkingDays = 0;
