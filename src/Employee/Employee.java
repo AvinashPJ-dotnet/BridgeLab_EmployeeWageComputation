@@ -1,7 +1,6 @@
 package Employee;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Employee implements EmployeeInterface {
 
@@ -36,7 +35,6 @@ public class Employee implements EmployeeInterface {
         int totalWage = 0;//store total wage
         int totalWorkingDays = 0;
         int totalWorkingHours = 0;
-        int[] wageEveryDay = new int[companyEmployeeWagesArray.getWorkingDaysPerMonth()];
         while (totalWorkingDays < companyEmployeeWagesArray.getWorkingDaysPerMonth() && totalWorkingHours + 4 < companyEmployeeWagesArray.getWorkingHourPerMonth()) {
 
             int dailyWage = 0;//store only one day wage
@@ -57,17 +55,17 @@ public class Employee implements EmployeeInterface {
                     break;
             }
             totalWorkingHours += dailyWorkingHours;
-            totalWage += dailyWage;
-            wageEveryDay[totalWorkingDays] = dailyWage;//store wage in to array on daily basis
             totalWorkingDays++;
+            companyEmployeeWagesArray.totalWage += dailyWage;
+            companyEmployeeWagesArray.wageEveryDay.add(dailyWage);//store wage in to array on daily basis
         }
         System.out.println("Name: " + companyEmployeeWagesArray.getCompanyName());
         System.out.println("Total Working Days:" + totalWorkingDays + "/" + companyEmployeeWagesArray.getWorkingDaysPerMonth() +
                 "\nTotal Working Hours: " + totalWorkingHours + "/" + companyEmployeeWagesArray.getWorkingHourPerMonth() +
-                "\nTotal monthly wage: $" + totalWage);
-        System.out.println("list of all day wages: \n" + Arrays.toString(wageEveryDay));
+                "\nTotal monthly wage: $" + companyEmployeeWagesArray.totalWage);
+        System.out.println("list of all day wages: \n" + companyEmployeeWagesArray.wageEveryDay);
         System.out.println();
-        return totalWage;
+        return companyEmployeeWagesArray.totalWage;
     }
 
     //Calculate employee wage
